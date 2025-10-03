@@ -10,12 +10,17 @@ dotenv.config();
 
 const app = express();
 
-// CORS Configuration - IMPORTANT for production
+// CORS Configuration - ADD YOUR VERCEL URL HERE
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
-    ? [process.env.FRONTEND_URL || '*']
-    : ['http://localhost:3000', 'http://localhost:5173'],
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'https://book-nest-three-beta.vercel.app',  // ← YOUR EXACT VERCEL URL
+    'https://booknest-oeoh.onrender.com'         // Your backend URL
+  ],
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200
 };
 
@@ -27,7 +32,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Health check endpoint - ADD THIS
+// Health check endpoint
 app.get('/', (req, res) => {
   res.json({ 
     message: 'BookNest API is running!',
