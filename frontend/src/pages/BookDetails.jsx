@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
+import { API_URL } from '../config/api';
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -24,7 +25,7 @@ const BookDetails = () => {
 
    const fetchBookDetails = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/books/${id}`);
+      const { data } = await axios.get(`${API_URL}/api/books/${id}`);
       setBook(data.book);
       setReviews(data.reviews || []); // Default to empty array
       setAverageRating(data.averageRating || 0); // Default to 0
@@ -44,7 +45,7 @@ const BookDetails = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:5000/api/reviews",
+        `${API_URL}/api/reviews`,
         {
           bookId: id,
           rating: parseInt(rating),
@@ -69,7 +70,7 @@ const BookDetails = () => {
     if (!window.confirm("Are you sure you want to delete this book?")) return;
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/books/${id}`, {
+      await axios.delete(`${API_URL}/api/books/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       navigate("/");
@@ -82,7 +83,7 @@ const BookDetails = () => {
     if (!window.confirm("Are you sure you want to delete this review?")) return;
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/reviews/${reviewId}`, {
+      await axios.delete(`${API_URL}/api/reviews/${reviewId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchBookDetails();

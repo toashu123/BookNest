@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 const EditBook = () => {
   const { id } = useParams();
@@ -29,7 +30,7 @@ const EditBook = () => {
 
   const fetchBook = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/books/${id}`);
+      const { data } = await axios.get(`${API_URL}/api/books/${id}`);
       setFormData({
         title: data.book.title,
         author: data.book.author,
@@ -61,7 +62,7 @@ const EditBook = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/books/${id}`, 
+        `${API_URL}/api/books/${id}`, 
         formData,
         {
           headers: {

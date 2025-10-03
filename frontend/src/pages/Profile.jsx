@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import { API_URL } from '../config/api';
 
 const Profile = () => {
   const { user, token } = useContext(AuthContext);
@@ -32,7 +33,7 @@ const Profile = () => {
 
       // Fetch user's books
       const booksResponse = await axios.get(
-        'http://localhost:5000/api/books',
+        `${API_URL}/api/books`,
         {
           headers: { Authorization: `Bearer ${authToken}` }
         }
@@ -45,7 +46,7 @@ const Profile = () => {
 
       // Fetch user's reviews
       const reviewsResponse = await axios.get(
-        `http://localhost:5000/api/reviews/user/${user.id}`,
+        `${API_URL}/api/reviews/user/${user.id}`,
         {
           headers: { Authorization: `Bearer ${authToken}` }
         }

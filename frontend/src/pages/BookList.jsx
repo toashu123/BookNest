@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
+import { API_URL } from '../config/api';
 
 const BookList = () => {
   const { isAuthenticated } = useContext(AuthContext);
@@ -38,7 +39,7 @@ const BookList = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `http://localhost:5000/api/books?page=${currentPage}&search=${search}&genre=${genre}&sort=${sort}`
+        `${API_URL}/api/books?page=${currentPage}&search=${search}&genre=${genre}&sort=${sort}`
       );
       setBooks(data.books);
       setTotalPages(data.totalPages);

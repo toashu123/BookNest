@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import { API_URL } from '../config/api';
 
 const AddBook = () => {
   const { token } = useContext(AuthContext); // Get token from context
@@ -44,7 +45,7 @@ const AddBook = () => {
       console.log('Submitting book:', formData); // Debug log
 
       const { data } = await axios.post(
-        'http://localhost:5000/api/books',
+        `${API_URL}/api/books`,
         formData,
         {
           headers: {

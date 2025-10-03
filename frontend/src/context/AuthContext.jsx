@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config/api';
 
 export const AuthContext = createContext();
 
@@ -25,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const { data } = await axios.get('http://localhost:5000/api/auth/me');
+      const { data } = await axios.get(`${API_URL}/api/auth/me`);
       console.log('Fetched user data:', data.user); // Debug log
       
       // Ensure user object has 'id' field for consistency
@@ -45,7 +46,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signup = async (name, email, password) => {
-    const { data } = await axios.post('http://localhost:5000/api/auth/signup', {
+    const { data } = await axios.post(`${API_URL}/api/auth/signup`, {
       name,
       email,
       password
@@ -63,7 +64,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    const { data } = await axios.post('http://localhost:5000/api/auth/login', {
+    const { data } = await axios.post(`${API_URL}/api/auth/login`, {
       email,
       password
     });
