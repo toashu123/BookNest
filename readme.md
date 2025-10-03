@@ -23,7 +23,6 @@ A full-stack MERN application where users can discover books, write reviews, and
 - 📊 **Sorting Options** - Sort by title, author, year, or latest added
 - 👤 **User Profiles** - Personal dashboard showing user's books and reviews
 - 🎨 **Modern UI/UX** - Responsive design with Tailwind CSS
-- 🌙 **Dark Mode** - Toggle between light and dark themes with preference persistence
 - 🔒 **Authorization** - Users can only edit/delete their own content
 - 📱 **Mobile Responsive** - Optimized for all screen sizes
 
